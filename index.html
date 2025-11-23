@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>วันครบรอบบบ 💐</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #fff0f5;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    #flower {
+      width: 150px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    #flower:hover {
+      transform: scale(1.1);
+    }
+
+    .petal {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: pink;
+      border-radius: 50%;
+      opacity: 0.8;
+      pointer-events: none;
+      animation: fall 2s forwards;
+    }
+
+    @keyframes fall {
+      0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+      100% { transform: translate(var(--x), 500px) rotate(360deg); opacity: 0; }
+    }
+
+    #letter {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: #fff;
+      border: 2px solid #ff69b4;
+      border-radius: 10px;
+      text-align: center;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <!-- เปลี่ยนชื่อไฟล์เป็นของคุณชายเอง -->
+  <img id="flower" src="flower.png" alt="ช่อดอกไม้">
+  
+  <div id="letter">
+    <h2>จดหมายถึงเเฟนนนน 💌</h2>
+    <p>สุขสันต์สันยังไงไม่รุ้ลืมมเเต่วันนี้วันครบรอบบเร็วมากกกกกรึเพราะเค้าทำเเต่งานกับการบ้านไม่ได้พักเเต่ก้ขอบคุณเทอน้าาที่อยู่กับเค้าค่อยฟังที่เค้าเตือนอยู่บ้างเค้าไม่รู้ว่าเค้าสนใจเทอพอมั้ยก้เเอบคิดอยู่กัวเทอน้อยใจเเต่เค้าพยามรีบทำงานเเล้วก็เเบ่งเวลาให้เทอโดยเฉพาะเลยยเเต่ก็กัวว่ามีเวลาน้อยเเล้วก็....เค้ารักเทออมากๆน้าารักนมเทอด้วยเเต่ก้รักเทออจิงๆน้าอันนี้เค้าตั้งใจทำเเต่ไม่รู้ได้ส่งตอนไหนเพราะน่าจามั่วๆกับงานนขอบคุณนะค้าบบ</p>
+  </div>
+
+  <script>
+    let clickCount = 0;
+    const flower = document.getElementById('flower');
+    const letter = document.getElementById('letter');
+
+    flower.addEventListener('click', () => {
+      clickCount++;
+
+      // สร้างกลีบดอกไม้
+      const petal = document.createElement('div');
+      petal.classList.add('petal');
+
+      // กำหนดตำแหน่ง x แบบสุ่มให้หล่นไม่ตรงกัน
+      const x = (Math.random() * 200 - 100) + 'px';
+      petal.style.setProperty('--x', x);
+
+      // ตำแหน่งเริ่มต้นตรงกลางช่อดอกไม้
+      const flowerRect = flower.getBoundingClientRect();
+      petal.style.left = (flowerRect.left + flowerRect.width/2 - 15) + 'px';
+      petal.style.top = (flowerRect.top + flowerRect.height/2 - 15) + 'px';
+
+      document.body.appendChild(petal);
+
+      // ลบกลีบเมื่อจบ animation
+      setTimeout(() => {
+        petal.remove();
+      }, 2000);
+
+      // ถ้ากดครบ 10 ครั้ง แสดงจดหมาย
+      if (clickCount >= 10) {
+        letter.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
